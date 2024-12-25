@@ -9,7 +9,7 @@ class PostController extends Controller
 {
     public function create()
     {
-        $postData = Post::orderBy('created_at', 'desc')->get()->toArray();
+        $postData = Post::orderBy('created_at', 'desc')->paginate(4);
         // $postData = Post::all()->toArray();
         return view('create', compact('postData'));
     }
@@ -23,7 +23,7 @@ class PostController extends Controller
 
         $postData = Post::orderBy('created_at', 'desc')->get()->toArray();
 
-        return redirect()->route("post#createPage")->with(['insertSuccess'=>'Successfully inserted 😉']);
+        return redirect()->route("post#createPage")->with(['updateSuccess'=>'Successfully inserted 😉']);
     }
 
     // delete data

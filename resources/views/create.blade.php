@@ -13,6 +13,13 @@
                         </div>
                     @endif
 
+                    @if (session('updateSuccess'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>{{ session('updateSuccess') }}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+
                     <form action="{{ route('post#insertPage') }}" method="POST">
                         @csrf
                         <div class="text-group m-2">
@@ -35,18 +42,19 @@
 
             {{-- second column --}}
             <div class="col-7">
+                <h3>Total - {{ $postData->total() }} </h3>
                 <div class="data-container">
                     @foreach ($postData as $item)
-                        <div class="post p-3 shadow mb-4">
-                            <h5>{{ $item['title'] }}</h5>
+                        <div class="post p-2 shadow mb-4">
+                            <h6>{{ $item->title }}</h6>
                             {{-- <p class="text-muted">{{$item['description']}}</p> --}}
-                            <p class="text-muted">{{ Str::words($item['description'], 30, '...') }}</p>
+                            <p class="text-muted">{{ Str::words($item->description, 30, '...') }}</p>
                             <div class="text-end">
-                                <a href="{{ route('post#delete', $item['id']) }}">
+                                <a href="{{ route('post#delete', $item->id) }}">
                                     <button class="btn btn-sm btn-none"><i
                                             class="fa-solid fa-trash text-danger"></i></button>
                                 </a>
-                                <a href="{{ route('post#readMorePage', $item['id']) }}">
+                                <a href="{{ route('post#readMorePage', $item->id) }}">
                                     <button class="btn btn-sm btn-none"><i
                                             class="fa-solid fa-arrow-right text-primary"></i></button>
                                 </a>
@@ -54,6 +62,8 @@
                         </div>
                     @endforeach
                 </div>
+
+                {{ $postData->links() }}
             </div>
         </div>
     </div>

@@ -18,6 +18,7 @@
 </head>
 
 <body>
+    <h5 class="text-secondary text-center">CRUD with Laravel 10</h5>
 @yield('content')
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
